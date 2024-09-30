@@ -101,7 +101,7 @@ public class TestShell {
         if (tokens.length == 3 && isValidLBA(tokens[1]) && isValidHex(tokens[2])) {
             int lba = Integer.parseInt(tokens[1]);
             String data = tokens[2];
-            executeCommand("java -jar SSD_Mini_Project.jar write " + tokens[1] + tokens[2]);
+            executeCommand("java -jar SSD_Mini_Project.jar write " + tokens[1]+ " " + tokens[2]);
         } else {
             System.out.println("INVALID COMMAND");
         }
