@@ -11,7 +11,6 @@ public class TestShell {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in); // 사용자 입력을 위한 Scanner
-        executeCommand("java -jar untitled.jar");
         while (true) {
             System.out.print("SHELL > ");
             String input = sc.nextLine(); // 사용자 입력 읽기
@@ -44,27 +43,29 @@ public class TestShell {
                     fullread(tokens);
                     break;
                 case "testapp1":
-                    fullwrite(tokens);
+                    String [] token = {"fullwrite ","0x11111111"};
+                    fullwrite(token);
                     fullread(tokens);
                     break;
                 case "testapp2":
                     for(int j =0;j<30;j++){
                         for(int i = 0 ; i<5;i++){
-                            String [] testinput = {"W",i+"","0xAAAABBBB"};
+                            String [] testinput = {"write ",i+"","0xAAAABBBB"};
                             write(testinput);
                         }
                     }
                     for(int i =0;i<5;i++){
-                        String [] testinput = {"w",i+"","0x12345678"};
+                        String [] testinput = {"write ",i+"","0x12345678"};
                         write(testinput);
                     }
                     for(int i =0;i<5;i++){
-                        String [] testinput = {"R",i+""};
+                        String [] testinput = {"read ",i+""};
                         read(testinput);
                     }
                     break;
                 default:
                     System.out.println("INVALID COMMAND"); // 잘못된 명령어 처리
+                    break;
             }
         }
     }
@@ -100,7 +101,7 @@ public class TestShell {
         if (tokens.length == 3 && isValidLBA(tokens[1]) && isValidHex(tokens[2])) {
             int lba = Integer.parseInt(tokens[1]);
             String data = tokens[2];
-            executeCommand("java -jar untitled.jar write " + tokens[1] + " " + tokens[2]);
+            executeCommand("java -jar SSD_Mini_Project.jar write " + tokens[1] + tokens[2]);
         } else {
             System.out.println("INVALID COMMAND");
         }
@@ -110,7 +111,7 @@ public class TestShell {
         // read 명령어 유효성 검사 및 실행
         if (tokens.length == 2 && isValidLBA(tokens[1])) {
             int lba = Integer.parseInt(tokens[1]);
-            executeCommand("java -jar untitled.jar read " + tokens[1]);
+            executeCommand("java -jar SSD_Mini_Project.jar read " + tokens[1]);
         } else {
             System.out.println("INVALID COMMAND");
         }
@@ -122,7 +123,7 @@ public class TestShell {
             String data = tokens[1];
             for(int i = 0;i<100;i++){
 //                ssd.write(i, data);
-                executeCommand("java -jar untitled.jar write " + i + " " + data);
+                executeCommand("java -jar SSD_Mini_Project.jar write " + i + " " + data);
             }
         } else {
             System.out.println("INVALID COMMAND");
@@ -133,7 +134,7 @@ public class TestShell {
         // fullread 명령어 실행
         if (tokens.length == 1) {
             for(int i = 0;i<100;i++){
-                executeCommand("java -jar untitled.jar read" + i);
+                executeCommand("java -jar SSD_Mini_Project.jar read " + i);
             }
         } else {
             System.out.println("INVALID COMMAND");
